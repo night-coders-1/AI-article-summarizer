@@ -50,58 +50,89 @@ AI-article-summarizer/
 ├── manifest.json            # Chrome extension config
 ├── README.md                # This file
 └── .gitignore               # Files & folders to ignore
+```
 
-<div align="left"> <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5" alt="HTML5"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3" alt="CSS3"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript"/> <img src="https://img.shields.io/badge/Google%20Gemini-4285F4?style=for-the-badge&logo=google" alt="Gemini API"/> </div>
+<div align="left">
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5" alt="HTML5"/>
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3" alt="CSS3"/>
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript" alt="JavaScript"/>
+</div>
 
-<ol> <li><strong>Clone or Download</strong> <pre><code>git clone https://github.com/night-coders-1/AI-article-summarizer.git cd AI-article-summarizer </code></pre> </li> <li><strong>Load in Chrome</strong> <ul> <li>Open <code>chrome://extensions/</code></li> <li>Enable <strong>Developer mode</strong> (toggle top‑right)</li> <li>Click <strong>Load unpacked</strong></li> <li>Select the <code>AI-article-summarizer</code> folder</li> </ul> </li> </ol>
+---
 
-🔧 Configuration
-Click the 🧠 AI Summarizer icon in your Chrome toolbar.
+## 🚀 Getting Started
 
-Click ⚙️ Settings at the bottom of the popup.
+1. **Clone or Download**
+    ```bash
+    git clone https://github.com/night-coders-1/AI-article-summarizer.git
+    cd AI-article-summarizer
+    ```
+2. **Load in Chrome**
+    - Go to `chrome://extensions`
+    - Enable "Developer mode"
+    - Click "Load unpacked" and select the project folder
 
-Go to 👉 Google AI Studio to create your Gemini API key.
+---
 
-Paste the key into the Settings input and click Save.
+## 🔧 Configuration
 
-🎯 Usage
-Navigate to any article or blog post.
+- Click the 🧠 AI Summarizer icon in your Chrome toolbar.
+- Click ⚙️ Settings at the bottom of the popup.
+- Go to 👉 Google AI Studio to create your Gemini API key.
+- Paste the key into the Settings input and click Save.
 
-Click the AI Summarizer icon.
+---
 
-Wait a second for auto‑detection, then click Summarize.
+## 🎯 Usage
 
-View or copy your summary directly from the popup!
+- Navigate to any article or blog post.
+- Click the AI Summarizer icon.
+- Wait a second for auto‑detection, then click Summarize.
+- View or copy your summary directly from the popup!
 
-<details> <summary>💡 Pro Tips</summary> - Use ⌨️ <code>Ctrl+Shift+S</code> to open the summary popup quickly. - Switch between “Bullet Points” or “Paragraph” mode in Settings. </details>
-🛠️ Development
-bash
-Copy
-Edit
+<details>
+  <summary>💡 Pro Tips</summary>
+
+  - Use ⌨️ <code>Ctrl+Shift+S</code> to open the summary popup quickly.
+  - Switch between “Bullet Points” or “Paragraph” mode in Settings.
+
+</details>
+
+---
+
+## 🛠️ Development
+
+```bash
 # Watch for changes (if using a bundler / live‑reload setup)
 npm install
 npm run dev
+```
 Currently this is a vanilla JS project—no build tools required.
 
-🤝 Contributing
+---
+
+## 🤝 Contributing
+
 We love PRs! To contribute:
 
-🍴 Fork this repo
+1. 🍴 Fork this repo
+2. 🔧 Create a feature branch (`git checkout -b feature/YourFeature`)
+3. ✅ Commit your changes (`git commit -m "Add YourFeature"`)
+4. 🔃 Push to your branch (`git push origin feature/YourFeature`)
+5. 📩 Open a Pull Request
 
-🔧 Create a feature branch (git checkout -b feature/YourFeature)
+---
 
-✅ Commit your changes (git commit -m "Add YourFeature")
+## 📄 License
 
-🔃 Push to your branch (git push origin feature/YourFeature)
-
-📩 Open a Pull Request
-
-📄 License
 This project does not yet have a license. Please contact the author for usage terms.
 
-👨‍💻 Author & Contact
-GitHub: @night-coders-1
+---
 
-Repository: AI-article-summarizer
+## 👨‍💻 Author & Contact
 
-<p align="center">⭐ If you found this project helpful, please give it a star!</p> ```
+GitHub: [@night-coders-1](https://github.com/night-coders-1)
+
+Repository: [AI-article-summarizer](https://github.com/night-coders-1/AI-article-summarizer)
+
+<p align="center">⭐ If you found this project helpful, please give it a star!</p>
