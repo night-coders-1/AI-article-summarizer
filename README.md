@@ -1,95 +1,107 @@
-# AI Article Summarizer
+<h1 align="center">🧠✨ AI Article Summarizer</h1>
 
-## Overview
+<p align="center">
+  <img src="https://img.shields.io/badge/Status-Live-green?style=for-the-badge" alt="status"/>
+  <img src="https://img.shields.io/badge/Chrome%20Extension-AI%20Summarizer-blue?style=for-the-badge" alt="chrome extension"/>
+  <img src="https://img.shields.io/github/languages/top/night-coders-1/AI-article-summarizer?style=for-the-badge" alt="top language"/>
+</p>
 
-**AI Article Summarizer** is a Chrome extension that leverages advanced AI to automatically summarize lengthy articles. It features a user-friendly interface, allows direct interaction in your browser, and provides concise article summaries instantly.
+<p align="center">
+  🚀 A lightweight Chrome extension that uses Google Gemini AI to summarize any article or webpage in seconds!
+</p>
 
----
+<hr/>
 
-## Features
+## 🔍 Overview
 
-- **AI-Powered Summarization:** Generates short, accurate summaries for any article or webpage.
-- **Chrome Extension:** Seamlessly integrates into your browser for instant access.
-- **Custom API Key Support:** Easily set your own Google Gemini API key for personalized usage.
-- **Modern UI:** Clean, intuitive interface built with HTML, CSS, and JavaScript.
-- **Secure & Client-Side:** No backend required—your data stays private.
-
----
-
-## Getting Started
-
-### Prerequisites
-
-- Google Chrome Browser (latest version recommended)
-- Google Account (for Gemini API key)
+**AI Article Summarizer** is a client‑side Chrome extension that auto‑generates concise, accurate summaries of long articles using the Google Gemini API.  
+No backend—your data never leaves your browser!
 
 ---
 
-### Installation
+## ✨ Key Features
 
-#### 1. Clone or Download the Repository
+- 🧠 **AI-Powered Summaries**  
+  Instantly condense any article into a few bullet points or a short paragraph.
 
-```bash
-git clone https://github.com/night-coders-1/AI-article-summarizer.git
-cd AI-article-summarizer
-```
+- 🧩 **Seamless Chrome Integration**  
+  Click the toolbar icon to summon the summarizer on any page.
 
-#### 2. Load the Extension in Chrome
+- 🔐 **Custom API Key**  
+  Securely paste your own Google Gemini API key in Settings.
 
-1. **Open Chrome Browser.**
-2. **Click on the Extensions icon** (puzzle piece in the top-right).
-3. **Click on "Manage extensions".**
-4. **Enable "Developer mode"** (toggle at the top-right of the extensions page).
-5. **Click on "Load unpacked".**
-6. **Select the `AI-article-summarizer` project folder.**
+- 💎 **Modern, Responsive UI**  
+  Built with HTML5, CSS3 & vanilla JavaScript for fast performance.
 
-The extension will now be added to Chrome and its icon will appear in the toolbar.
+- 🔒 **Fully Client‑Side**  
+  Zero server calls—complete privacy & instant results.
 
 ---
 
-## How to Use the Extension
+## 📁 Repository Structure
 
-1. **Click the AI Summarizer extension icon** in your Chrome toolbar.
-2. At the bottom of the extension popup, **click on "Settings"**.
-3. **Go to [Google AI Studio](https://aistudio.google.com/app/apikey)** and **create a Gemini API key**.
-4. **Paste your Gemini API key** into the API key section in the extension's settings.
-5. **Click "Save"** to store your API key.
+```text
+AI-article-summarizer/
+├── icons/                   # Extension icons (16x16, 48x48, 128x128)
+├── popup.html               # Extension popup UI
+├── popup.js                 # Main logic: content detection & summarization
+├── popup.css                # Styling for the popup
+├── background.js            # (Optional) Background tasks, if any
+├── manifest.json            # Chrome extension config
+├── README.md                # This file
+└── .gitignore               # Files & folders to ignore
 
-You're now ready to use the AI Article Summarizer!
+<div align="left"> <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5" alt="HTML5"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3" alt="CSS3"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript"/> <img src="https://img.shields.io/badge/Google%20Gemini-4285F4?style=for-the-badge&logo=google" alt="Gemini API"/> </div>
 
----
+<ol> <li><strong>Clone or Download</strong> <pre><code>git clone https://github.com/night-coders-1/AI-article-summarizer.git cd AI-article-summarizer </code></pre> </li> <li><strong>Load in Chrome</strong> <ul> <li>Open <code>chrome://extensions/</code></li> <li>Enable <strong>Developer mode</strong> (toggle top‑right)</li> <li>Click <strong>Load unpacked</strong></li> <li>Select the <code>AI-article-summarizer</code> folder</li> </ul> </li> </ol>
 
-## Usage Steps
+🔧 Configuration
+Click the 🧠 AI Summarizer icon in your Chrome toolbar.
 
-- **Visit any webpage or open an article** you want to summarize.
-- **Click the AI Summarizer extension icon**.
-- **let the extension auto-detect.
-- **Click on "Summarize"** to generate a concise summary.
-- The summary will appear instantly in the extension popup.
+Click ⚙️ Settings at the bottom of the popup.
 
----
+Go to 👉 Google AI Studio to create your Gemini API key.
 
+Paste the key into the Settings input and click Save.
 
-## Technologies Used
+🎯 Usage
+Navigate to any article or blog post.
 
-- **HTML5**: Structure and extension popup
-- **CSS3**: Styling and responsive design
-- **JavaScript**: Core logic and AI interaction
+Click the AI Summarizer icon.
 
----
+Wait a second for auto‑detection, then click Summarize.
 
-## Contribution
+View or copy your summary directly from the popup!
 
-Feel free to fork this repo, make improvements, and submit pull requests!
+<details> <summary>💡 Pro Tips</summary> - Use ⌨️ <code>Ctrl+Shift+S</code> to open the summary popup quickly. - Switch between “Bullet Points” or “Paragraph” mode in Settings. </details>
+🛠️ Development
+bash
+Copy
+Edit
+# Watch for changes (if using a bundler / live‑reload setup)
+npm install
+npm run dev
+Currently this is a vanilla JS project—no build tools required.
 
----
+🤝 Contributing
+We love PRs! To contribute:
 
-## License
+🍴 Fork this repo
 
-This project currently does not declare a license. Please contact the owner for usage terms.
+🔧 Create a feature branch (git checkout -b feature/YourFeature)
 
----
+✅ Commit your changes (git commit -m "Add YourFeature")
 
-## Contact
+🔃 Push to your branch (git push origin feature/YourFeature)
 
-- GitHub: [night-coders-1](https://github.com/night-coders-1)
+📩 Open a Pull Request
+
+📄 License
+This project does not yet have a license. Please contact the author for usage terms.
+
+👨‍💻 Author & Contact
+GitHub: @night-coders-1
+
+Repository: AI-article-summarizer
+
+<p align="center">⭐ If you found this project helpful, please give it a star!</p> ```
