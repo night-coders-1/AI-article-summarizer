@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "AI Summary Pro",
+  "description": "Elegant AI-powered article summarization with a premium experience",
+  "version": "1.0",
+  "permissions": ["scripting", "activeTab", "storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "brain-icon.svg"   
+  },
+  "icons": {
+    "16": "brain-icon.svg",
+    "48": "brain-icon.svg",
+    "128": "brain-icon.svg"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_page": "options.html",
+  "host_permissions": ["<all_urls>"]
+}

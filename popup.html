@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AI Summary Pro</title>
+    <link rel="icon" href="brain-icon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="animations.css" />
+    <style>
+      :root {
+        /* Colors */
+        --primary-color: #6366f1;
+        --primary-light: #818cf8;
+        --primary-dark: #4f46e5;
+        --secondary-color: #10b981;
+        --secondary-light: #34d399;
+        --secondary-dark: #059669;
+        --accent-color: #ec4899;
+        --accent-light: #f472b6;
+        --accent-dark: #db2777;
+
+        /* Gradients */
+        --gradient-start: #6366f1;
+        --gradient-mid: #8b5cf6;
+        --gradient-end: #ec4899;
+
+        /* Text */
+        --text-primary: #f9fafb;
+        --text-secondary: #e5e7eb;
+        --text-tertiary: #9ca3af;
+
+        /* Backgrounds */
+        --bg-primary: #111827;
+        --bg-secondary: #1f2937;
+        --bg-tertiary: #374151;
+
+        /* Glass effects */
+        --glass-bg: rgba(31, 41, 55, 0.7);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --glass-highlight: rgba(255, 255, 255, 0.07);
+        --glass-shadow: rgba(0, 0, 0, 0.3);
+
+        /* Spacing */
+        --space-1: 4px;
+        --space-2: 8px;
+        --space-3: 12px;
+        --space-4: 16px;
+        --space-5: 20px;
+        --space-6: 24px;
+        --space-8: 32px;
+
+        /* Shadows */
+        --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+        --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3),
+          0 4px 6px rgba(0, 0, 0, 0.2);
+        --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.3),
+          0 10px 10px rgba(0, 0, 0, 0.2);
+
+        /* Border radius */
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
+        --radius-full: 9999px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        width: 380px;
+        height: 560px; /* Restored to original height */
+        color: var(--text-primary);
+        overflow: hidden;
+        position: relative;
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+      }
+
+      /* Animated gradient background */
+      @keyframes gradientBG {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Floating particles removed to fix height issues */
+
+      /* Float animation removed as it's no longer needed */
+
+      /* Top overlay removed to fix height issues */
+
+      .container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: var(--space-5);
+        display: flex;
+        flex-direction: column;
+        z-index: 2;
+      }
+
+      /* Header styles */
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: var(--space-6);
+        position: relative;
+        z-index: 3;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        animation: fadeIn 0.6s ease-out;
+      }
+
+      .logo i {
+        font-size: 24px;
+        background: linear-gradient(
+          135deg,
+          var(--gradient-start),
+          var(--gradient-end)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: iconPulse 3s infinite ease-in-out;
+      }
+
+      .logo h1 {
+        font-size: 20px;
+        font-weight: 600;
+        background: linear-gradient(
+          135deg,
+          var(--text-primary),
+          var(--text-secondary)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        position: relative;
+      }
+
+      /* Pro badge is now added via JavaScript for better animation control */
+
+      /* Options section */
+      .options {
+        display: flex;
+        gap: var(--space-4);
+        margin-bottom: var(--space-6);
+        animation: fadeIn 0.8s ease-out;
+      }
+
+      /* Select dropdown styling */
+      .select-wrapper {
+        position: relative;
+        flex: 1;
+        background: var(--glass-bg);
+        border-radius: var(--radius-md);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: var(--shadow-md);
+        transition: all 0.3s ease;
+        overflow: hidden;
+      }
+
+      .select-wrapper::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          rgba(99, 102, 241, 0.05),
+          rgba(236, 72, 153, 0.05)
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .select-wrapper:hover::before {
+        opacity: 1;
+      }
+
+      .select-wrapper::after {
+        content: "\f107";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        position: absolute;
+        right: var(--space-4);
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-secondary);
+        pointer-events: none;
+        transition: transform 0.3s ease;
+      }
+
+      .select-wrapper:hover {
+        border-color: var(--glass-highlight);
+        box-shadow: var(--shadow-lg), 0 0 15px rgba(99, 102, 241, 0.3);
+      }
+
+      .select-wrapper.active::after {
+        transform: translateY(-50%) rotate(180deg);
+      }
+
+      .select-wrapper.flash {
+        animation: flash 0.3s ease;
+      }
+
+      @keyframes flash {
+        0% {
+          box-shadow: var(--shadow-md);
+        }
+        50% {
+          box-shadow: var(--shadow-lg), 0 0 20px rgba(99, 102, 241, 0.5);
+        }
+        100% {
+          box-shadow: var(--shadow-md);
+        }
+      }
+
+      select {
+        width: 100%;
+        padding: var(--space-3) var(--space-8) var(--space-3) var(--space-4);
+        background: transparent;
+        border: none;
+        color: var(--text-primary);
+        font-family: "Inter", sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        appearance: none;
+        outline: none;
+        z-index: 1;
+        position: relative;
+      }
+
+      select:focus {
+        outline: none;
+      }
+
+      select option {
+        background-color: var(--bg-secondary);
+        color: var(--text-primary);
+      }
+
+      @keyframes dropdownOpen {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Button group styling */
+      .button-group {
+        display: flex;
+        gap: var(--space-3);
+      }
+
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-2);
+        padding: var(--space-3) var(--space-4);
+        background: linear-gradient(
+          135deg,
+          var(--gradient-start),
+          var(--gradient-end)
+        );
+        color: white;
+        border: none;
+        border-radius: var(--radius-md);
+        font-family: "Inter", sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+      }
+
+      button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          var(--gradient-start),
+          var(--gradient-end)
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 0;
+      }
+
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg), 0 0 15px rgba(99, 102, 241, 0.3);
+      }
+
+      button:hover::before {
+        opacity: 0.5;
+        animation: gradientShift 3s ease infinite;
+      }
+
+      button:active {
+        transform: translateY(0);
+        box-shadow: var(--shadow-sm);
+      }
+
+      button i {
+        font-size: 14px;
+        z-index: 1;
+      }
+
+      button span {
+        z-index: 1;
+      }
+
+      button i.animated {
+        animation: iconPulse 2s infinite ease-in-out;
+      }
+
+      @keyframes iconPulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      #copy-btn,
+      #quick-copy-btn,
+      #refresh-btn {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-md);
+      }
+
+      #copy-btn:hover,
+      #quick-copy-btn:hover,
+      #refresh-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      #refresh-btn i {
+        transition: transform 0.3s ease;
+      }
+
+      #refresh-btn:hover i {
+        transform: rotate(180deg);
+      }
+
+      /* Ripple effect */
+      @keyframes ripple {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+
+      .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.4);
+        transform: scale(0);
+        animation: ripple 0.6s linear;
+        z-index: 0;
+      }
+
+      /* Result container */
+      .result-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background: var(--glass-bg);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: var(--shadow-lg);
+        overflow: hidden;
+        transition: all 0.3s ease;
+        animation: fadeIn 1s ease-out;
+        position: relative;
+      }
+
+      .result-container:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-xl), 0 0 20px rgba(99, 102, 241, 0.2);
+        border-color: var(--glass-highlight);
+      }
+
+      .result-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          var(--glass-highlight),
+          transparent
+        );
+      }
+
+      .result-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--space-4);
+        background: linear-gradient(
+          135deg,
+          rgba(99, 102, 241, 0.2),
+          rgba(236, 72, 153, 0.2)
+        );
+        border-bottom: 1px solid var(--glass-border);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .result-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 200%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent
+        );
+        animation: shimmer 3s infinite;
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes shimmer {
+        0% {
+          transform: translateX(0%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      .result-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .result-actions {
+        display: flex;
+        gap: var(--space-2);
+      }
+
+      .result-actions button {
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid var(--glass-border);
+      }
+
+      .result-actions button:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      #result {
+        flex: 1;
+        padding: var(--space-4);
+        overflow-y: auto;
+        color: var(--text-secondary);
+        font-size: 14px;
+        line-height: 1.6;
+        position: relative;
+        background: rgba(31, 41, 55, 0.3);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      /* Custom scrollbar */
+      #result::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      #result::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: var(--radius-full);
+      }
+
+      #result::-webkit-scrollbar-thumb {
+        background: linear-gradient(
+          to bottom,
+          var(--gradient-start),
+          var(--gradient-end)
+        );
+        border-radius: var(--radius-full);
+      }
+
+      /* Text styling */
+      #result p {
+        margin-bottom: var(--space-3);
+      }
+
+      /* Highlight for important key points */
+      #result .highlight {
+        background: linear-gradient(
+          135deg,
+          rgba(99, 102, 241, 0.2),
+          rgba(139, 92, 246, 0.2),
+          rgba(236, 72, 153, 0.2)
+        );
+        background-size: 200% 200%;
+        padding: 2px 8px;
+        margin: 0 1px;
+        border-radius: var(--radius-sm);
+        font-weight: 700;
+        color: var(--text-primary);
+        display: inline-block;
+        position: relative;
+        border-left: 3px solid var(--gradient-mid);
+        box-shadow: 0 0 5px rgba(139, 92, 246, 0.4);
+        animation: highlightGlow 3s infinite ease-in-out,
+          gradientShift 6s infinite ease-in-out;
+        transition: all 0.3s ease;
+        text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+      }
+
+      #result .highlight:hover {
+        transform: translateY(-1px) scale(1.02);
+        background: linear-gradient(
+          135deg,
+          rgba(99, 102, 241, 0.3),
+          rgba(139, 92, 246, 0.3),
+          rgba(236, 72, 153, 0.3)
+        );
+        background-size: 200% 200%;
+        box-shadow: 0 2px 8px rgba(139, 92, 246, 0.5);
+        cursor: default;
+      }
+
+      #result li {
+        margin-bottom: var(--space-2);
+        position: relative;
+        padding-left: var(--space-5);
+        list-style-type: none;
+      }
+
+      #result li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 10px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          var(--gradient-start),
+          var(--gradient-mid),
+          var(--gradient-end)
+        );
+        box-shadow: 0 0 5px rgba(139, 92, 246, 0.5);
+        animation: gradientShift 3s infinite ease-in-out;
+      }
+
+      /* Loading animation */
+      .loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        animation: pulse-text 2s infinite ease-in-out;
+      }
+
+      @keyframes pulse-text {
+        0% {
+          opacity: 0.6;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0.6;
+        }
+      }
+
+      .loader {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        margin-bottom: var(--space-4);
+      }
+
+      .loading-text {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--text-primary);
+        margin-top: var(--space-2);
+        animation: pulse-text 1.5s infinite ease-in-out;
+      }
+
+      .loader::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          var(--gradient-start),
+          var(--gradient-end)
+        );
+        animation: pulse-gradient 1.5s infinite ease-in-out;
+      }
+
+      .loader::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70%;
+        height: 70%;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          var(--gradient-end),
+          var(--gradient-start)
+        );
+        animation: pulse-inner-gradient 1.5s infinite ease-in-out;
+        animation-delay: 0.5s;
+      }
+
+      @keyframes pulse-gradient {
+        0% {
+          transform: scale(0.8);
+          opacity: 0.8;
+        }
+        50% {
+          transform: scale(1.2);
+          opacity: 0.5;
+        }
+        100% {
+          transform: scale(0.8);
+          opacity: 0.8;
+        }
+      }
+
+      @keyframes pulse-inner-gradient {
+        0% {
+          transform: translate(-50%, -50%) scale(0.8);
+          opacity: 0.8;
+        }
+        50% {
+          transform: translate(-50%, -50%) scale(1.2);
+          opacity: 0.5;
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(0.8);
+          opacity: 0.8;
+        }
+      }
+
+      /* Loading dots animation */
+      .loading-dots:after {
+        content: ".";
+        animation: dots 1.5s steps(5, end) infinite;
+      }
+
+      @keyframes dots {
+        0%,
+        20% {
+          color: rgba(255, 255, 255, 0);
+          text-shadow: 0.25em 0 0 rgba(255, 255, 255, 0),
+            0.5em 0 0 rgba(255, 255, 255, 0);
+        }
+        40% {
+          color: white;
+          text-shadow: 0.25em 0 0 rgba(255, 255, 255, 0),
+            0.5em 0 0 rgba(255, 255, 255, 0);
+        }
+        60% {
+          text-shadow: 0.25em 0 0 white, 0.5em 0 0 rgba(255, 255, 255, 0);
+        }
+        80%,
+        100% {
+          text-shadow: 0.25em 0 0 white, 0.5em 0 0 white;
+        }
+      }
+
+      /* Tooltip styling */
+      .tooltip {
+        position: relative;
+      }
+
+      .tooltip::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: 125%;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: var(--space-2) var(--space-3);
+        background: var(--glass-bg);
+        color: var(--text-primary);
+        font-size: 12px;
+        border-radius: var(--radius-sm);
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--shadow-md);
+        z-index: 10;
+        animation: tooltipFadeIn 0.3s ease-in-out;
+      }
+
+      .tooltip::before {
+        content: "";
+        position: absolute;
+        bottom: 125%;
+        left: 50%;
+        transform: translateX(-50%) translateY(100%);
+        border-width: 5px 5px 0;
+        border-style: solid;
+        border-color: var(--glass-bg) transparent transparent;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 10;
+        animation: tooltipArrowFadeIn 0.3s ease-in-out;
+      }
+
+      .tooltip:hover::after,
+      .tooltip:hover::before {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      @keyframes tooltipFadeIn {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+
+      @keyframes tooltipArrowFadeIn {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(110%);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(100%);
+        }
+      }
+
+      /* General animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 0.8;
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 0.8;
+        }
+      }
+
+      /* Ripple effect */
+      .ripple-effect {
+        position: absolute;
+        border-radius: 50%;
+        transform: scale(0);
+        animation: ripple 0.6s linear;
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+
+      @keyframes ripple {
+        to {
+          transform: scale(2.5);
+          opacity: 0;
+        }
+      }
+
+      /* Staggered fade-in animations */
+      .fade-in-1 {
+        animation: fadeIn 0.5s ease-out;
+      }
+      .fade-in-2 {
+        animation: fadeIn 0.5s ease-out 0.1s forwards;
+        opacity: 0;
+      }
+      .fade-in-3 {
+        animation: fadeIn 0.5s ease-out 0.2s forwards;
+        opacity: 0;
+      }
+
+      /* Footer styling */
+      footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: var(--space-4) 0 0;
+        font-size: 12px;
+        color: var(--text-tertiary);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.1), transparent);
+        animation: fadeIn 1.2s ease-out;
+      }
+
+      footer a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        margin: 0 var(--space-2);
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      footer a::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          var(--gradient-start),
+          var(--gradient-end)
+        );
+        transition: width 0.3s ease;
+      }
+
+      footer a:hover {
+        color: var(--text-primary);
+      }
+
+      footer a:hover::after {
+        width: 100%;
+      }
+
+      /* Success animation */
+      @keyframes successPulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .success-pulse {
+        animation: successPulse 0.5s ease-in-out;
+      }
+
+      /* Error animation */
+      @keyframes errorShake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        20%,
+        60% {
+          transform: translateX(-5px);
+        }
+        40%,
+        80% {
+          transform: translateX(5px);
+        }
+      }
+
+      .error-shake {
+        animation: errorShake 0.5s ease-in-out;
+      }
+
+      /* Spin animation for refresh icon */
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .spin {
+        animation: spin 1s linear infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Overlay div removed to fix height issues -->
+    <div class="container">
+      <header class="header">
+        <div class="logo">
+          <i class="fas fa-brain"></i>
+          <h1>AI Summary</h1>
+        </div>
+      </header>
+
+      <div class="options">
+        <div class="select-wrapper fade-in-1">
+          <select id="summary-type">
+            <option value="brief">Brief Summary</option>
+            <option value="detailed">Detailed Summary</option>
+            <option value="bullets">Key Points</option>
+          </select>
+        </div>
+
+        <div class="button-group fade-in-2">
+          <button
+            id="summarize"
+            class="tooltip"
+            data-tooltip="Generate Summary"
+          >
+            <i class="fas fa-magic animated"></i>
+            <span>Summarize</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="result-container fade-in-3">
+        <div class="result-header">
+          <div class="result-title">Summary</div>
+          <div class="result-actions">
+            <button
+              id="quick-copy-btn"
+              class="tooltip"
+              data-tooltip="Copy to Clipboard"
+            >
+              <i class="fas fa-copy"></i>
+            </button>
+            <button
+              id="refresh-btn"
+              class="tooltip"
+              data-tooltip="Refresh Summary"
+            >
+              <i class="fas fa-sync-alt"></i>
+            </button>
+          </div>
+        </div>
+
+        <div id="result">
+          <div
+            class="fade-in"
+            style="padding: var(--space-6) 0; text-align: center"
+          >
+            <div
+              style="
+                position: relative;
+                width: 60px;
+                height: 60px;
+                margin: 0 auto var(--space-4) auto;
+              "
+            >
+              <i
+                class="fas fa-lightbulb"
+                style="
+                  font-size: 60px;
+                  background: linear-gradient(
+                    135deg,
+                    var(--gradient-start),
+                    var(--gradient-end)
+                  );
+                  -webkit-background-clip: text;
+                  background-clip: text;
+                  -webkit-text-fill-color: transparent;
+                  filter: drop-shadow(0 2px 4px rgba(99, 102, 241, 0.2));
+                "
+              ></i>
+              <div
+                style="
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  right: 0;
+                  bottom: 0;
+                  background: radial-gradient(
+                    circle,
+                    rgba(99, 102, 241, 0.1) 0%,
+                    transparent 70%
+                  );
+                  border-radius: 50%;
+                  animation: pulse 2s infinite ease-in-out;
+                "
+              ></div>
+            </div>
+            <p
+              style="
+                color: var(--text-secondary);
+                font-weight: 500;
+                margin-bottom: var(--space-3);
+              "
+            >
+              Ready to Summarize
+            </p>
+            <p>
+              Click the Summarize button to generate an AI-powered summary of
+              the current article.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <a href="#">By Sourabh Singh</a> |
+        <a href="options.html" target="_blank">Settings</a>
+      </footer>
+    </div>
+
+    <script src="popup.js"></script>
+    <script>
+      // Add ripple effect to buttons
+      document.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", function (e) {
+          const ripple = document.createElement("span");
+          ripple.classList.add("ripple");
+
+          // Get position relative to the button
+          const rect = this.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          ripple.style.left = `${x}px`;
+          ripple.style.top = `${y}px`;
+
+          this.appendChild(ripple);
+
+          setTimeout(() => {
+            ripple.remove();
+          }, 600);
+        });
+      });
+
+      // Add flash effect to select on change
+      document
+        .getElementById("summary-type")
+        .addEventListener("change", function () {
+          const wrapper = this.parentElement;
+          wrapper.classList.add("flash");
+
+          setTimeout(() => {
+            wrapper.classList.remove("flash");
+          }, 300);
+        });
+
+      // Add focus/blur effects to select
+      document
+        .getElementById("summary-type")
+        .addEventListener("focus", function () {
+          this.parentElement.classList.add("active");
+        });
+
+      document
+        .getElementById("summary-type")
+        .addEventListener("blur", function () {
+          this.parentElement.classList.remove("active");
+        });
+
+      // Initialize premium features and select icons
+      document.addEventListener("DOMContentLoaded", () => {
+        // Add premium badge class
+        const proBadge = document.querySelector(".logo h1::after");
+        if (proBadge) {
+          // We can't directly add a class to a pseudo-element, so we'll use JavaScript to enhance it
+          const logoTitle = document.querySelector(".logo h1");
+          logoTitle.setAttribute("data-premium", "true");
+
+          // Create an actual badge element for more control
+          const badge = document.createElement("span");
+          badge.classList.add("premium-badge");
+          badge.textContent = "Pro";
+          badge.style.fontSize = "10px";
+          badge.style.background =
+            "linear-gradient(135deg, var(--gradient-start), var(--gradient-end))";
+          badge.style.color = "white";
+          badge.style.padding = "2px 6px";
+          badge.style.borderRadius = "var(--radius-full)";
+          badge.style.position = "absolute";
+          badge.style.top = "-5px";
+          badge.style.right = "-30px";
+          badge.style.fontWeight = "700";
+          badge.style.boxShadow = "var(--shadow-sm)";
+          badge.style.animation = "glow 3s infinite ease-in-out";
+
+          logoTitle.style.position = "relative";
+          logoTitle.appendChild(badge);
+        }
+
+        // Initialize select icons
+        const selectElement = document.getElementById("summary-type");
+        const options = selectElement.options;
+
+        // Add icons to options
+        for (let i = 0; i < options.length; i++) {
+          const option = options[i];
+          let icon = "";
+
+          switch (option.value) {
+            case "brief":
+              icon = "bolt";
+              break;
+            case "detailed":
+              icon = "file-alt";
+              break;
+            case "bullets":
+              icon = "list";
+              break;
+          }
+
+          // Store the icon information
+          option.setAttribute("data-icon", icon);
+        }
+
+        // Initialize the icon for the currently selected option
+        const selectedOption =
+          selectElement.options[selectElement.selectedIndex];
+        const iconName = selectedOption.getAttribute("data-icon");
+
+        if (iconName) {
+          // Create icon element
+          const iconElement = document.createElement("i");
+          iconElement.classList.add("select-icon", "fas", `fa-${iconName}`);
+
+          // Position the icon
+          iconElement.style.position = "absolute";
+          iconElement.style.left = "var(--space-3)";
+          iconElement.style.top = "50%";
+          iconElement.style.transform = "translateY(-50%)";
+          iconElement.style.pointerEvents = "none";
+          iconElement.style.zIndex = "2";
+          iconElement.style.fontSize = "14px";
+          iconElement.style.color = "var(--text-secondary)";
+
+          // Add to select wrapper
+          const selectWrapper = selectElement.parentElement;
+          selectWrapper.appendChild(iconElement);
+
+          // Adjust select padding to make room for icon
+          selectElement.style.paddingLeft = "var(--space-8)";
+        }
+      });
+    </script>
+  </body>
+</html>
